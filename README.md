@@ -21,7 +21,7 @@
 
 - [ ] Add exogenous variables to NeuralForecast models (oil, promotions)
 - [ ] Tune NeuralForecast models (LSTM/GRU/RNN) — increase `max_steps`, grid search hyperparameters
-- [ ] Try NHITS and PatchTST from NeuralForecast
+- [x] Try NHITS and PatchTST from NeuralForecast
 - [ ] Implement hierarchical forecasting: store-level → family-level reconciliation
 - [ ] Ensemble top-performing statistical + neural models
 
