@@ -8,3 +8,14 @@ wheels/
 
 # Virtual environments
 .venv
+
+
+# Lightning logs
+lightning_logs/
+
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Images
+*.png
