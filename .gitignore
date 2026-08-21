@@ -24,3 +24,12 @@ lightning_logs/
 mlflow.db
 mlruns/
 mlartifacts/
+
+# PyTorch Lightning checkpoints
+checkpoints/
+
+# Datasets files
+data/
+*.csv
+*.parquet
+*.avro
