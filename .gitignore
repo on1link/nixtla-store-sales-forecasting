@@ -19,3 +19,8 @@ lightning_logs/
 
 # Images
 *.png
+
+# MLflow local stores
+mlflow.db
+mlruns/
+mlartifacts/
