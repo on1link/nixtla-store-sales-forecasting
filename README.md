@@ -71,11 +71,55 @@ Project complete when:
 ### 3. Data & Feature Engineering
 
 - [ ] Handle 31.3% zero-sales entries (intermittent demand strategy)
+  - **Done:** Zero-sales strategy chosen, implemented, and RMSLE improved or justified vs baseline
+  - [ ] Analyze zero-sales distribution by store, family, and day of week
+    - **Done:** Distribution summary table/plot exists showing zero-sales % by store, family, weekday
+  - [ ] Decide strategy: separate zero/non-zero model, Croston's method, or keep as-is
+    - **Done:** Decision documented with rationale referencing analysis results
+  - [ ] Implement chosen zero-sales handling
+    - **Done:** Pipeline applies chosen strategy; no raw zeros leak into model when strategy filters them
+  - [ ] Validate impact on RMSLE vs baseline
+    - **Done:** Before/after RMSLE comparison logged in MLflow
 - [ ] Improve oil price missing value imputation (currently ffill/bfill)
-- [ ] Incorporate holidays.csv and transactions.csv as exogenous variables
+  - **Done:** Chosen method implemented; forecast accuracy same or better than ffill/bfill
+  - [ ] Evaluate interpolation methods (linear, spline) vs ffill/bfill
+    - **Done:** Comparison of imputation methods with RMSLE impact documented
+  - [ ] Implement chosen imputation and compare forecast accuracy
+    - **Done:** Pipeline uses new imputation; MLflow run shows accuracy delta
+- [ ] Incorporate holidays.csv as exogenous variable
+  - **Done:** Holiday features in training DataFrame; model accepts them without error
+  - [ ] Parse holiday types (national, regional, local, transfer, bridge)
+    - **Done:** All 5 holiday types parsed; no unparsed rows remain
+  - [ ] Map regional/local holidays to relevant stores
+    - **Done:** Regional/local holidays mapped to correct store subset; national applied to all
+  - [ ] Create binary/categorical holiday features
+    - **Done:** Holiday columns present in feature DataFrame with correct dtype
+- [ ] Incorporate transactions.csv as exogenous variable
+  - **Done:** Transaction features available for training; test-set strategy implemented
+  - [ ] Join transaction counts to training data by store and date
+    - **Done:** Transaction column present in merged training DataFrame; no NaN in training rows
+  - [ ] Handle missing transaction dates (test set has no transactions)
+    - **Done:** Missing dates filled or excluded; no NaN crashes at inference
+  - [ ] Decide strategy for test-set transaction forecasting or exclusion
+    - **Done:** Decision documented; pipeline handles test set without transaction data
 - [ ] Add promotion (`onpromotion`) as exogenous regressor
-- [ ] Engineer store metadata features (city, state, type, cluster from stores.csv)
+  - **Done:** `onpromotion` column in feature matrix; model trains and predicts with it
+- [ ] Engineer store metadata features from stores.csv
+  - **Done:** Store metadata columns in feature DataFrame; no missing values
+  - [ ] Add city and state as categorical features
+    - **Done:** City/state columns encoded and present in feature matrix
+  - [ ] Add store type as categorical feature
+    - **Done:** Store type column encoded and present
+  - [ ] Add cluster as categorical/ordinal feature
+    - **Done:** Cluster column present with chosen encoding (categorical or ordinal)
 - [ ] Scale to all 1,782 time series (currently using 5 subset categories)
+  - **Done:** Full pipeline runs on 1,782 series; results validated against subset baseline
+  - [ ] Profile memory and runtime on current 5-series subset
+    - **Done:** Memory peak and wall time recorded for 5-series run
+  - [ ] Test on intermediate subset (e.g., 50 series) for scaling bottlenecks
+    - **Done:** 50-series run completes; bottlenecks identified and addressed
+  - [ ] Run full 1,782-series pipeline and validate results
+    - **Done:** 1,782-series run completes; RMSLE within expected range
 
 ### 4. Modeling — Nixtla (Statistical + Neural)
 
