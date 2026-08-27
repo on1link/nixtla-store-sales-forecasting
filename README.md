@@ -20,6 +20,19 @@ Project complete when:
 6. **Tests pass** — unit tests for data, features, and evaluation modules
 7. **Deployable** — chosen deployment mode (API or batch) running with health check
 
+## Deliverables
+
+| Artifact | Location | Description |
+| ---------- | ---------- | ------------- |
+| Submission CSV | `submissions/` | Kaggle-format predictions on `test.csv` |
+| Trained models | MLflow Model Registry | Best model per series, tagged staging/production |
+| Experiment logs | MLflow tracking server | All runs with metrics, params, artifacts |
+| Comparison table | `reports/model_comparison.md` | RMSLE breakdown: statistical vs neural vs GB |
+| Config file | `config.yaml` | Model params, data paths, feature toggles |
+| Python pipeline | `src/data.py`, `src/features.py`, `src/models.py`, `main.py` | Modular forecasting pipeline |
+| Test suite | `tests/` | Unit tests for data, features, evaluation |
+| API/Batch service | `deploy/` | Forecasting service with health check |
+
 ## TODO
 
 ### 1. Experiment Tracking (MLflow)
