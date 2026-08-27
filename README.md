@@ -1,5 +1,13 @@
 # Nixtla based store sales forecast
 
+# Conventions
+
+## Feature experiment convention
+
+Defined as 'model/feature_set/date' where:
+
+- Feature set is a human readable summarize set of features, e.g. 'v3_baseline' or 'v1_pricing_calendar' or 'baseline_oil'
+
 ## TODO
 
 ### 1. Experiment Tracking (MLflow)
