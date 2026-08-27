@@ -295,11 +295,49 @@ Hybrid of two forecasting strategies:
 ### 7. Pipeline & Code Quality
 
 - [ ] Refactor notebook into modular Python pipeline (`main.py` is stub)
+  - **Done:** `python main.py` runs end-to-end; notebook logic lives in modules
+  - [ ] Extract data loading and preprocessing into `data.py`
+    - **Done:** `data.py` loads and cleans data; notebook imports from it
+  - [ ] Extract feature engineering into `features.py`
+    - **Done:** `features.py` builds feature matrix; notebook imports from it
+  - [ ] Extract model training and evaluation into `models.py`
+    - **Done:** `models.py` trains and evaluates; notebook imports from it
+  - [ ] Wire modules together in `main.py`
+    - **Done:** `main.py` calls data → features → models → output; runs without error
 - [ ] Add CLI interface for running forecasts
+  - **Done:** `python main.py train`, `evaluate`, `predict` work from command line
+  - [ ] Add argument parsing (model type, data path, output path, config)
+    - **Done:** `--help` shows all args; invalid args produce clear error
+  - [ ] Support train, evaluate, and predict subcommands
+    - **Done:** All 3 subcommands run; each produces expected output
 - [ ] Implement unit tests for data processing and evaluation
+  - **Done:** `pytest` passes; covers data, features, and evaluation
+  - [ ] Tests for data loading and cleaning functions
+    - **Done:** Tests verify loading, NaN handling, dtype correctness
+  - [ ] Tests for feature engineering functions
+    - **Done:** Tests verify feature columns, no leakage, correct values
+  - [ ] Tests for evaluation metric calculations (RMSLE)
+    - **Done:** RMSLE tests match known hand-calculated values
 
 ### 8. Deployment
 
 - [ ] Build reproducible training pipeline (config-driven)
+  - **Done:** Fresh clone + config file → full training run with no code edits
+  - [ ] Create YAML/TOML config for model params, data paths, feature toggles
+    - **Done:** Config file exists; all tunable params and paths defined in it
+  - [ ] Ensure pipeline runs end-to-end from config without code changes
+    - **Done:** `python main.py train --config config.yaml` succeeds on clean checkout
 - [ ] Add data versioning (DVC or similar)
+  - **Done:** Raw data and artifacts tracked; `dvc pull` restores them
+  - [ ] Initialize DVC in repo
+    - **Done:** `.dvc/` directory exists; `dvc status` runs clean
+  - [ ] Track raw datasets and processed artifacts
+    - **Done:** `.dvc` files committed for all datasets; `dvc pull` restores data
 - [ ] Deploy forecasting service (API or batch)
+  - **Done:** Service runs; health check returns 200; predictions return valid JSON/CSV
+  - [ ] Choose deployment mode (REST API vs scheduled batch job)
+    - **Done:** Decision documented with rationale
+  - [ ] Implement chosen deployment
+    - **Done:** Service starts and serves predictions
+  - [ ] Add health check and basic monitoring
+    - **Done:** `/health` endpoint (or equivalent) returns status; basic metrics collected
