@@ -261,10 +261,36 @@ Hybrid of two forecasting strategies:
 
 ### 6. Evaluation & Submission
 
-- [ ] Cross-validate on full dataset (currently 3 folds, 5 series)
+- [ ] Cross-validate on full dataset
+  - **Done:** CV runs on all 1,782 series; per-fold and aggregate RMSLE recorded
+  - [ ] Expand from 5 series to full 1,782 series
+    - **Done:** CV pipeline processes 1,782 series without OOM or timeout
+  - [ ] Increase fold count if compute allows (currently 3 folds)
+    - **Done:** Fold count set to max feasible; documented why if kept at 3
+  - [ ] Record per-series and aggregate RMSLE per fold
+    - **Done:** Per-series and aggregate metrics logged in MLflow per fold
 - [ ] Benchmark neural models against statistical baselines on same splits
+  - **Done:** Comparison table with per-family and aggregate RMSLE exists
+  - [ ] Run statistical baselines (SeasonalNaive, AutoETS, AutoARIMA) on same CV splits
+    - **Done:** All 3 baselines produce predictions on same folds; metrics logged
+  - [ ] Run neural models on same CV splits
+    - **Done:** Neural models produce predictions on same folds; metrics logged
+  - [ ] Compare per-family and aggregate RMSLE
+    - **Done:** Comparison table shows winner per family and overall
 - [ ] Benchmark gradient boosting ensemble against all other approaches
-- [ ] Generate predictions on `test.csv` for Kaggle submission
+  - **Done:** GB ensemble results added to comparison table; overall winner identified
+  - [ ] Run gradient boosting ensemble on same CV splits
+    - **Done:** GB ensemble predictions on same folds; metrics logged
+  - [ ] Produce comparison table: statistical vs neural vs gradient boosting
+    - **Done:** Table saved to `reports/model_comparison.md`; all approaches compared
+- [ ] Generate Kaggle submission
+  - **Done:** Submission CSV uploaded; public leaderboard score recorded
+  - [ ] Produce predictions on `test.csv` with best model/ensemble
+    - **Done:** Predictions cover all test rows; no NaN values
+  - [ ] Format submission CSV per Kaggle spec
+    - **Done:** CSV has correct columns (`id`, `sales`); row count matches test set
+  - [ ] Submit and record public leaderboard score
+    - **Done:** Score recorded in MLflow and README; position noted
 
 ### 7. Pipeline & Code Quality
 
