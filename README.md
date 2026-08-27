@@ -123,11 +123,41 @@ Project complete when:
 
 ### 4. Modeling — Nixtla (Statistical + Neural)
 
-- [ ] Add exogenous variables to NeuralForecast models (oil, promotions)
-- [ ] Tune NeuralForecast models (LSTM/GRU/RNN) — increase `max_steps`, grid search hyperparameters
+- [ ] Add exogenous variables to NeuralForecast models
+  - **Done:** Models train with exogenous inputs; RMSLE comparison vs univariate logged
+  - [ ] Add oil price as exogenous input
+    - **Done:** Oil price column accepted by model; no shape/NaN errors
+  - [ ] Add promotion flag as exogenous input
+    - **Done:** Promotion flag accepted by model; no shape/NaN errors
+  - [ ] Validate exogenous features improve RMSLE vs univariate baseline
+    - **Done:** MLflow comparison shows exogenous vs univariate RMSLE delta
+- [ ] Tune NeuralForecast models
+  - **Done:** Best hyperparams per model logged; top performers selected
+  - [ ] Tune LSTM: grid search `max_steps`, hidden size, learning rate
+    - **Done:** Grid search complete; best LSTM config logged in MLflow
+  - [ ] Tune GRU: grid search `max_steps`, hidden size, learning rate
+    - **Done:** Grid search complete; best GRU config logged in MLflow
+  - [ ] Tune RNN: grid search `max_steps`, hidden size, learning rate
+    - **Done:** Grid search complete; best RNN config logged in MLflow
+  - [ ] Compare tuned models and select top performers
+    - **Done:** Comparison table produced; top N models identified
 - [x] Try NHITS and PatchTST from NeuralForecast
-- [ ] Implement hierarchical forecasting: store-level → family-level reconciliation
+- [ ] Implement hierarchical forecasting
+  - **Done:** Reconciled forecasts produced; coherent across hierarchy levels
+  - [ ] Define hierarchy levels (store → family → total)
+    - **Done:** Hierarchy matrix defined; aggregation produces correct totals
+  - [ ] Generate base forecasts at each level
+    - **Done:** Base forecasts exist at every hierarchy level
+  - [ ] Apply reconciliation method (bottom-up, top-down, or MinTrace)
+    - **Done:** Reconciliation applied; bottom-level forecasts sum to top-level
 - [ ] Ensemble top-performing statistical + neural models
+  - **Done:** Ensemble RMSLE beats best single model (or justified why not)
+  - [ ] Select top N models per series by CV RMSLE
+    - **Done:** Top N models identified per series from CV results
+  - [ ] Test ensemble strategies (simple average, weighted average, stacking)
+    - **Done:** At least 3 strategies tested; results logged
+  - [ ] Validate ensemble RMSLE vs best single model
+    - **Done:** Comparison logged in MLflow; winner selected
 
 ### 5. Modeling — Gradient Boosting Ensemble (Kaggle Winning Approach)
 
