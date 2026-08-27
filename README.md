@@ -8,6 +8,18 @@ Defined as 'model/feature_set/date' where:
 
 - Feature set is a human readable summarize set of features, e.g. 'v3_baseline' or 'v1_pricing_calendar' or 'baseline_oil'
 
+## Definition of Done
+
+Project complete when:
+
+1. **Kaggle submission** — public leaderboard RMSLE below top-25% threshold
+2. **Full-series coverage** — all 1,782 series forecasted, not 5-series subset
+3. **Reproducible pipeline** — single config-driven `main.py` run produces submission CSV end-to-end
+4. **Model comparison documented** — statistical vs neural vs gradient boosting RMSLE comparison table with CV results
+5. **Experiment tracking live** — all runs logged in MLflow with hyperparams, metrics, and registered best models
+6. **Tests pass** — unit tests for data, features, and evaluation modules
+7. **Deployable** — chosen deployment mode (API or batch) running with health check
+
 ## TODO
 
 ### 1. Experiment Tracking (MLflow)
