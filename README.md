@@ -171,21 +171,93 @@ Hybrid of two forecasting strategies:
 
 #### Feature Engineering
 
-- [ ] Time features: day of week, week of year, month, year, day of year, month-end flags, Fourier seasonal terms
-- [ ] Lag features: sales lags (1, 7, 14, 28 days), rolling mean/std (7-day, 28-day windows)
-- [ ] Promotion features: promotion lags, promotion rolling averages
-- [ ] Target encoding: store avg sales, family avg sales, store-family avg sales
-- [ ] External data: oil prices, store metadata, transactions, holiday/event signals
+- [ ] Time features
+  - **Done:** All time columns present in feature DataFrame with correct values
+  - [ ] Day of week, day of year, week of year, month, year
+    - **Done:** Columns present; spot-check matches calendar for sample dates
+  - [ ] Month-end / month-start binary flags
+    - **Done:** Flags correct for known month boundaries
+  - [ ] Fourier seasonal terms (annual and weekly cycles)
+    - **Done:** Sine/cosine pairs present; period matches 365.25 (annual) and 7 (weekly)
+- [ ] Lag features
+  - **Done:** Lag and rolling columns present; no data leakage from future values
+  - [ ] Sales lags: 1, 7, 14, 28 days
+    - **Done:** Lag columns present; values match manual shift check
+  - [ ] Rolling mean: 7-day and 28-day windows
+    - **Done:** Rolling mean columns present; NaN only in expected warm-up rows
+  - [ ] Rolling std: 7-day and 28-day windows
+    - **Done:** Rolling std columns present; NaN only in expected warm-up rows
+- [ ] Promotion features
+  - **Done:** Promotion lag and rolling columns present in feature matrix
+  - [ ] Promotion lags (1, 7, 14 days)
+    - **Done:** Lag columns present; values match manual shift check
+  - [ ] Promotion rolling averages (7-day, 28-day windows)
+    - **Done:** Rolling average columns present; values within [0, 1] range
+- [ ] Target encoding
+  - **Done:** Target-encoded columns present; computed on training fold only (no leakage)
+  - [ ] Store average sales
+    - **Done:** Column present; values match groupby mean on training data
+  - [ ] Family average sales
+    - **Done:** Column present; values match groupby mean on training data
+  - [ ] Store-family interaction average sales
+    - **Done:** Column present; values match groupby mean on training data
+- [ ] External data integration
+  - **Done:** All external feature columns present; no unexpected NaN
+  - [ ] Oil price features (current, lagged, rolling average)
+    - **Done:** Oil columns present; lagged values match manual shift
+  - [ ] Store metadata (type, cluster, city, state)
+    - **Done:** Metadata columns merged; no missing values for known stores
+  - [ ] Transaction counts (lagged, rolling)
+    - **Done:** Transaction columns present; test-set handling applied
+  - [ ] Holiday/event binary signals
+    - **Done:** Holiday columns present; known holidays flagged correctly
 
 #### Models
 
 - [ ] LightGBM with GPU-accelerated training
+  - **Done:** Tuned LightGBM trains on GPU; best params logged in MLflow
+  - [ ] Baseline LightGBM model with default params
+    - **Done:** Baseline RMSLE logged; serves as tuning reference
+  - [ ] Hyperparameter tuning (num_leaves, learning_rate, max_depth, reg)
+    - **Done:** Best params found; RMSLE improvement over baseline logged
 - [ ] CatBoost with GPU-accelerated training
+  - **Done:** Tuned CatBoost trains on GPU; best params logged in MLflow
+  - [ ] Baseline CatBoost model with default params
+    - **Done:** Baseline RMSLE logged; serves as tuning reference
+  - [ ] Hyperparameter tuning (depth, learning_rate, iterations, l2_reg)
+    - **Done:** Best params found; RMSLE improvement over baseline logged
 - [ ] XGBoost with GPU-accelerated training
-- [ ] Weighted recursive ensemble (LGB 35% / CB 40% / XGB 25%)
-- [ ] Direct multi-horizon models (16 independent horizon models)
-- [ ] Final hybrid blend (60% recursive / 40% direct)
+  - **Done:** Tuned XGBoost trains on GPU; best params logged in MLflow
+  - [ ] Baseline XGBoost model with default params
+    - **Done:** Baseline RMSLE logged; serves as tuning reference
+  - [ ] Hyperparameter tuning (max_depth, learning_rate, n_estimators, reg)
+    - **Done:** Best params found; RMSLE improvement over baseline logged
 - [ ] Log target transformation + recent-observation weighted learning
+  - **Done:** log1p/expm1 roundtrip correct; sample weights decay verified
+  - [ ] Implement log1p target transform with expm1 inverse
+    - **Done:** Transform applied; `expm1(log1p(y)) == y` holds for all training targets
+  - [ ] Implement sample weights decaying by recency
+    - **Done:** Recent rows weighted higher; weight distribution plotted/verified
+- [ ] Weighted recursive ensemble (LGB 35% / CB 40% / XGB 25%)
+  - **Done:** Ensemble predictions produced; weights validated or optimized via CV
+  - [ ] Train each model with shared feature pipeline
+    - **Done:** All 3 models train on identical feature matrix
+  - [ ] Validate weight allocation via CV (or optimize weights)
+    - **Done:** Weight search results logged; final weights chosen
+- [ ] Direct multi-horizon models (16 independent horizon models)
+  - **Done:** 16 models trained; per-horizon RMSLE logged
+  - [ ] Build training data per horizon (day 1 through day 16)
+    - **Done:** 16 separate training sets created; target correctly offset per horizon
+  - [ ] Train one model per horizon day
+    - **Done:** 16 models trained; each logged separately in MLflow
+  - [ ] Validate per-horizon predictions independently
+    - **Done:** Per-horizon RMSLE computed; no horizon significantly worse than others
+- [ ] Final hybrid blend (60% recursive / 40% direct)
+  - **Done:** Hybrid RMSLE beats both recursive-only and direct-only
+  - [ ] Combine recursive and direct predictions
+    - **Done:** Blended predictions match expected shape; no NaN
+  - [ ] Validate hybrid RMSLE vs individual strategies
+    - **Done:** Comparison table: recursive vs direct vs hybrid RMSLE logged
 
 ### 6. Evaluation & Submission
 
