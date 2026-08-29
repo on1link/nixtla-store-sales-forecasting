@@ -41,15 +41,15 @@ Project complete when:
   - **Done:** `mlflow ui` serves tracking UI; runs persist across restarts
 - [x] Define experiment naming convention (e.g., `{model_type}/{feature_set}/{date}`)
   - **Done:** Convention documented; all new runs follow it consistently
-- [ ] Log model type and architecture config per run
+- [x] Log model type and architecture config per run
   - **Done:** Every logged run includes model type and full architecture params
-- [ ] Log feature set used per run (which exogenous variables included)
+- [x] Log feature set used per run (which exogenous variables included)
   - **Done:** Every logged run tags which exogenous variables were active
-- [ ] Log CV fold metrics individually (MAE, RMSE, RMSLE per fold)
+- [x] Log CV fold metrics individually (MAE, RMSE, RMSLE per fold)
   - **Done:** Per-fold metrics visible in MLflow for any run with CV
-- [ ] Log aggregated CV metrics (mean ± std across folds)
+- [x] Log aggregated CV metrics (mean ± std across folds)
   - **Done:** Mean and std metrics logged as top-level run metrics
-- [ ] Log hyperparameters per run (learning rate, layers, epochs, etc.)
+- [x] Log hyperparameters per run (learning rate, layers, epochs, etc.)
   - **Done:** All tunable params logged; reproducible from logged values alone
 - [ ] Log training duration and resource usage per run
   - **Done:** Wall time and GPU/CPU usage logged per run
