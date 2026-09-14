@@ -159,6 +159,34 @@ Project complete when:
   - [ ] Validate ensemble RMSLE vs best single model
     - **Done:** Comparison logged in MLflow; winner selected
 
+---
+
+### MILESTONE: Notebook → Modular Python Project
+
+**Gate:** Complete sections 1–4 in the notebook before proceeding. Everything below this line must be built as Python modules, not notebook cells.
+
+**Why:** The notebook served its purpose — data exploration, baseline models, experiment tracking patterns. Gradient boosting ensembles, full-scale CV, and deployment require testable, config-driven code that doesn't belong in a notebook.
+
+**Before crossing this gate:**
+
+- [ ] All section 1–4 `[x]` items verified and runs reproducible
+- [ ] Best notebook model identified (winner from statistical vs neural comparison)
+- [ ] `evaluate_models()` and data loading patterns validated — ready to extract
+- [ ] MLflow experiment structure finalized (no more schema changes)
+
+**Transition steps:**
+
+1. Extract data loading/cleaning → `src/data.py`
+2. Extract feature engineering → `src/features.py`
+3. Extract model training/evaluation → `src/models.py`
+4. Wire together in `main.py` with CLI args and YAML config
+5. Add unit tests for each module
+6. All new modeling (sections 5+) goes into modules, not notebook
+
+**After crossing:** The notebook becomes a visualization/demo tool only. All training, evaluation, and submission runs go through `python main.py`.
+
+---
+
 ### 5. Modeling — Gradient Boosting Ensemble (Kaggle Winning Approach)
 
 #### Architecture
