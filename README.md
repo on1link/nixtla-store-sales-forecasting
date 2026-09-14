@@ -51,15 +51,15 @@ Project complete when:
   - **Done:** Mean and std metrics logged as top-level run metrics
 - [x] Log hyperparameters per run (learning rate, layers, epochs, etc.)
   - **Done:** All tunable params logged; reproducible from logged values alone
-- [ ] Log training duration and resource usage per run
+- [x] Log training duration and resource usage per run
   - **Done:** Wall time and GPU/CPU usage logged per run
-- [ ] Build query to retrieve best model per `unique_id` ranked by RMSLE
+- [x] Build query to retrieve best model per `unique_id` ranked by RMSLE
   - **Done:** Query returns correct best model for any given series
-- [ ] Build query to compare models across feature sets for same series
+- [x] Build query to compare models across feature sets for same series
   - **Done:** Query returns comparison table filterable by series and feature set
-- [ ] Register best-performing model per series in MLflow Model Registry
+- [x] Register best-performing model per series in MLflow Model Registry
   - **Done:** Registry contains one model per series; `mlflow.pyfunc.load_model` loads it
-- [ ] Tag registered models with stage (staging/production)
+- [x] Tag registered models with stage (staging/production)
   - **Done:** All registered models tagged; stage transitions logged
 
 ### 2. Critical Fixes & Repo Hygiene
