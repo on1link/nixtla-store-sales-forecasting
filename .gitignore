@@ -33,3 +33,6 @@ data/
 *.csv
 *.parquet
 *.avro
+
+# Local guides
+TODO_quick.md
