@@ -72,9 +72,9 @@ Project complete when:
 
 - [ ] Handle 31.3% zero-sales entries (intermittent demand strategy)
   - **Done:** Zero-sales strategy chosen, implemented, and RMSLE improved or justified vs baseline
-  - [ ] Analyze zero-sales distribution by store, family, and day of week
+  - [x] Analyze zero-sales distribution by store, family, and day of week
     - **Done:** Distribution summary table/plot exists showing zero-sales % by store, family, weekday
-  - [ ] Decide strategy: separate zero/non-zero model, Croston's method, or keep as-is
+  - [x] Decide strategy: separate zero/non-zero model, Croston's method, or keep as-is
     - **Done:** Decision documented with rationale referencing analysis results
   - [ ] Implement chosen zero-sales handling
     - **Done:** Pipeline applies chosen strategy; no raw zeros leak into model when strategy filters them
